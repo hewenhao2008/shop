@@ -1,0 +1,59 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心 - 商品列表 </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/Public/Styles/general.css" rel="stylesheet" type="text/css" />
+<link href="/Public/Styles/main.css" rel="stylesheet" type="text/css" />
+<script src="/Public/Js/jquery.min.js"></script>
+</head>
+<body>
+<h1>
+    <span class="action-span"><a href="/index.php/Admin/Admin/add">添加管理员</a></span>
+    <span class="action-span1"><a href="__GROUP__">ECSHOP 管理中心</a></span>
+    <span id="search_id" class="action-span1"> - 管理员列表 </span>
+    <div style="clear:both"></div>
+</h1>
+<!-- 商品列表 -->
+<form method="post" action="" name="listForm" onsubmit="">
+    <div class="list-div" id="listDiv">
+        <table cellpadding="3" cellspacing="1">
+            <tr>
+                <th width="80"><input type="checkbox" id="id1"/></th>
+                <th>id</th>
+                <th>用户名</th>
+                <th>操作</th>
+            </tr>
+            <?php foreach($list as $k=>$v): ?>
+            <tr>
+                <td align="center"><input type="checkbox" name="did[]"/></td>
+                <td align="center"><?php echo $v['id'];?></td>
+                <td align="center"><?php echo $v['username'];?></td>
+                <td align="center">
+                <a href="" title="编辑"><img src="/Public/Images/icon_edit.gif" width="16" height="16" border="0" /></a> 
+                <?php if($v['id'] > 1): ?>
+                <a href="/index.php/Admin/Admin/del/id/<?php echo $v['id'];?>" onclick="return confirm('确定要删除么?');" title="删除"><img src="/Public/Images/icon_trash.gif" width="16" height="16" border="0" /></a></td>
+                <?php endif; ?>
+            </tr>
+            <?php endforeach;?>
+            <tr>
+				<td>批量删除</td>
+                <td colspan="3">
+                    <?php echo $show;?>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+<script>
+	$("#id1").on('click',function(){
+		var status = $("#id1").prop("checked");
+		if(status)
+		   $("input[name='did[]']").prop("checked",true);
+		else
+		   $("input[name='did[]']").prop("checked",false);
+	});
+	
+</script>
+</body>
+</html>
